@@ -17,16 +17,14 @@
 // Licensed under the MIT License.
 //-------------------------------------------------------------------
 
-var Tableau = require("./Tableau/index.js");
-var Model = require("./Model");
-var branchAndCut = require("./Tableau/branchAndCut");
-var expressions = require("./expressions.js");
-var validation = require("./Validation");
-var Constraint = expressions.Constraint;
-var Variable = expressions.Variable;
-var Numeral = expressions.Numeral;
-var Term = expressions.Term;
-var External = require("./External/main.js");
+import Tableau from "./Tableau/index.js";
+import Model from "./Model.js";
+import * as branchAndCut from "./Tableau/branchAndCut.js";
+import validation from "./Validation.js";
+import { Constraint, Variable, Term } from "./expressions.js";
+import External from "./External/main.js";
+import ReformatLP from "./External/lpsolve/Reformat.js";
+import Polyopt from "./Polyopt.js";
 
 // Place everything under the Solver Name Space
 var Solver = function () {
@@ -37,7 +35,6 @@ var Solver = function () {
     this.branchAndCut = branchAndCut;
     this.Constraint = Constraint;
     this.Variable = Variable;
-    this.Numeral = Numeral;
     this.Term = Term;
     this.Tableau = Tableau;
     this.lastSolvedModel = null;
@@ -81,7 +78,7 @@ var Solver = function () {
         //
         if(typeof model.optimize === "object"){
             if(Object.keys(model.optimize > 1)){
-                return require("./Polyopt")(this, model);
+                return Polyopt(this, model);
             }
         }
 
@@ -185,7 +182,7 @@ var Solver = function () {
      *          real solving library...in this case
      *          lp_solver
      **************************************************************/
-    this.ReformatLP = require("./External/lpsolve/Reformat.js");
+    this.ReformatLP = ReformatLP;
 
 
      /*************************************************************
@@ -224,23 +221,9 @@ var Solver = function () {
      *
      **************************************************************/
     this.MultiObjective = function(model){
-        return require("./Polyopt")(this, model);
+        return Polyopt(this, model);
     };
 };
 
-// var define = define || undefined;
-// var window = window || undefined;
+export default new Solver();
 
-// If the project is loading through require.js, use `define` and exit
-if (typeof define === "function") {
-    define([], function () {
-        return new Solver();
-    });
-// If the project doesn't see define, but sees window, put solver on window
-} else if (typeof window === "object"){
-    window.solver = new Solver();
-} else if (typeof self === "object"){
-    self.solver = new Solver();
-}
-// Ensure that its available in node.js env
-module.exports = new Solver();

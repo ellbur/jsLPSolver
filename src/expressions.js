@@ -188,12 +188,11 @@ Equality.prototype.relax = function (weight, priority) {
     this.lowerBound._relax(this.relaxation);
 };
 
-
-module.exports = {
-    Constraint: Constraint,
-    Variable: Variable,
-    IntegerVariable: IntegerVariable,
-    SlackVariable: SlackVariable,
-    Equality: Equality,
-    Term: Term
+export {
+    Constraint,
+    Variable,
+    IntegerVariable,
+    SlackVariable,
+    Equality,
+    Term
 };

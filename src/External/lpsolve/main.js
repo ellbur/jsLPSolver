@@ -12,9 +12,10 @@
 //
 //
 
-// var reformat = require("./Reformat.js");
-
-exports.reformat = require("./Reformat.js");
+import reformat from "./Reformat.js";
+export { reformat };
+import fs from 'fs';
+import { execFile as exec } from "child_process";
 
 function clean_data(data){
 
@@ -62,7 +63,7 @@ function clean_data(data){
 
 
 
-exports.solve = function(model){
+export function solve (model){
     //
     return new Promise(function(res, rej){
         //
@@ -74,7 +75,7 @@ exports.solve = function(model){
         //
         // Convert JSON model to lp_solve format
         //
-        var data = require("./Reformat.js")(model);
+        var data = reformat(model);
         
         
         if(!model.external){
@@ -119,8 +120,6 @@ exports.solve = function(model){
         // 
         //
         
-        var fs = require("fs");
-        
         fs.writeFile(model.external.tempName, data, function(fe, fd){
             if(fe){
                 rej(fe);
@@ -130,7 +129,6 @@ exports.solve = function(model){
                 // Neat.
                 //
                 // Now we need to execute our CLI...
-                var exec = require("child_process").execFile;
                 
                 //
                 // Put the temp file name in the args array...

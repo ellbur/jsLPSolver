@@ -5,14 +5,8 @@
 /*global console*/
 /*global process*/
 
-var Tableau = require("./Tableau/Tableau.js");
-var branchAndCut = require("./Tableau/branchAndCut.js");
-var expressions = require("./expressions.js");
-var Constraint = expressions.Constraint;
-var Equality = expressions.Equality;
-var Variable = expressions.Variable;
-var IntegerVariable = expressions.IntegerVariable;
-var Term = expressions.Term;
+import Tableau from "./Tableau/Tableau.js";
+import { Constraint, Equality, Variable, IntegerVariable } from "./expressions.js";
 
 /*************************************************************
  * Class: Model
@@ -52,7 +46,7 @@ function Model(precision, name) {
     //
     this.messages = [];
 }
-module.exports = Model;
+export default Model;
 
 Model.prototype.minimize = function () {
     this.isMinimization = true;

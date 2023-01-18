@@ -35,7 +35,7 @@
 
      **************************************************************/
 
-module.exports = function(solver, model){
+export default function(solver, model){
 
     // I have no idea if this is actually works, or what,
     // but here is my algorithm to solve linear programs

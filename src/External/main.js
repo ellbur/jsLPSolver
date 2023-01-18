@@ -7,6 +7,6 @@
 /*global Promise*/
 /*global module*/
 
-module.exports = {
-    "lpsolve": require("./lpsolve/main.js")
-};
+import { solve as lpsolve } from "./lpsolve/main.js";
+export default { lpsolve };
+

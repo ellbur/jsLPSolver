@@ -292,7 +292,7 @@ function from_JSON(model){
 }
 
 
-module.exports = function (model) {
+export default function (model) {
     // If the user is giving us an array
     // or a string, convert it to a JSON Model
     // otherwise, spit it out as a string
