@@ -13,7 +13,7 @@
     "url": "https://github.com/ellbur/jsLPSolver"
   },
   "type": "module",
-  "main": "./src/main",
+  "main": "./src/main.js",
   "types": "./types/main.d.ts",
   "keywords": [
     "Linear",
