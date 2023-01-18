@@ -1,3 +1,6 @@
+
+This is a small modification of Justin Wolcott's excellent [jsLPSolver](https://github.com/JWally/jsLPSolver) to make it an es6 module.
+
 jsLPSolver
 ==========
 [A linear programming solver for the rest of us!](https://youtu.be/LbfMmCf5-ds?t=51)
@@ -34,32 +37,16 @@ model in a JavaScript object, and solve it through the solver's `solve` function
 
 (in Node)
 ```
-npm install javascript-lp-solver --save
-```
-
-(in browser through CDN)
-```html
-<script src="https://unpkg.com/javascript-lp-solver/prod/solver.js"></script>
-```
-
-(webpack)
-```javascript
-const webpack = require('webpack'); //to access built-in plugins
-
-module.exports = {
-        "mode": "development",
-        "plugins": [
-            new webpack.IgnorePlugin(/(fs|child_process)/),
-        ]
-}
+npm install @ellbur/javascript-lp-solver --save
 ```
 
 ### Use:
 
 ```javascript
-var solver = require("./src/solver"),
-  results,
-  model = {
+import JSLPSolver from '@ellbur/javascript-lp-solver';
+const solver = new JSLPSolver();
+
+var model = {
     "optimize": "capacity",
     "opType": "max",
     "constraints": {
@@ -83,7 +70,7 @@ var solver = require("./src/solver"),
     },
 };
 
-results = solver.Solve(model);
+var results = solver.Solve(model);
 console.log(results);
 ```
 
@@ -110,8 +97,7 @@ Say you live in the real world and partial results aren't realistic, too messy, 
 > aren't allowed in this dumb world problem?
 
 ```javascript
-var solver = require("./src/solver"),
-    model = {
+const model = {
         "optimize": "profit",
         "opType": "max",
         "constraints": {
@@ -140,10 +126,9 @@ So its not truly async, but an instance of solver can be easily(?) put in an ins
 *worker.js*
 ```javascript
 
-// n.b. Solver connects itself to the global 'self'
-// if its available...
-//
-importScripts("/prod/solver.js");
+
+import JSLPSolver from '@ellbur/javascript-lp-solver';
+const solver = new JSLPSolver();
 
 onmessage = function(d){
     var results = solver.Solve(d.data);
