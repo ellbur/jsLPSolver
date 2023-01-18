@@ -1,8 +1,10 @@
 
-import theMod from '../src/main.js';
+import JSLPSolver from '../src/main.js';
 
-console.log(theMod);
-console.log(theMod.Solve(
+const jsLPSolver = new JSLPSolver();
+
+console.log(jsLPSolver);
+console.log(jsLPSolver.Solve(
   {
     optimize: "capacity",
     opType: "max",

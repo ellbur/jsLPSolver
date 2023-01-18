@@ -225,5 +225,5 @@ var Solver = function () {
     };
 };
 
-export default new Solver();
+export default Solver;
 
