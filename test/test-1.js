@@ -3,7 +3,6 @@ import JSLPSolver from '../src/main.js';
 
 const jsLPSolver = new JSLPSolver();
 
-console.log(jsLPSolver);
 console.log(jsLPSolver.Solve(
   {
     optimize: "capacity",
